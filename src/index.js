@@ -54,6 +54,25 @@ export function matToEulerXYZ(m) {
 }
 
 /**
+ * The inverse of `matToEulerXYZ`: three's Euler XYZ as a row-major 3x3 (== mesh-x
+ * mat3 `eulerXYZ`).
+ *
+ * Beside its inverse deliberately. A runtime solver that reads a bone's euler and
+ * has to turn it back into a matrix needs both halves of the same convention, and
+ * the moment they live in different files one of them gets "fixed" alone.
+ */
+export function matFromEulerXYZ(x, y, z) {
+	const cx = Math.cos(x), sx = Math.sin(x)
+	const cy = Math.cos(y), sy = Math.sin(y)
+	const cz = Math.cos(z), sz = Math.sin(z)
+	return [
+		cy * cz, -cy * sz, sy,
+		cx * sz + sx * sy * cz, cx * cz - sx * sy * sz, -sx * cy,
+		sx * sz - cx * sy * cz, sx * cz + cx * sy * sz, cx * cy,
+	]
+}
+
+/**
  * 2-bone analytical IK in a plane (law of cosines). Targets beyond reach clamp to a
  * straight chain.
  * @param {number} l0 - upper segment length (base→mid)

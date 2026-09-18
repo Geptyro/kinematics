@@ -1,6 +1,6 @@
 {
   "name": "kinematics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pure, framework-agnostic kinematics math (analytic 2-bone IK) shared by the build-time animation baker (mesh-x) and runtime pose solvers (falcra). No engine/render dependencies.",
   "type": "module",
   "exports": {
